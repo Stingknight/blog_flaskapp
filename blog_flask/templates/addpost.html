@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Add post page {% endblock %}
+{% block link %}<link rel="stylesheet" href="{{url_for('static',filename='css/add_post.css')}}">{% endblock %}
+{% block content %}
+<body>
+    
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+<div class="container-fluid my-5">
+    <form action="" method="POST">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                <label for="exampleInputtitle" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="exampleInputtitle" aria-describedby="textHelp">
+                
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+        </div>
+        <br>
+
+       
+        
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                <label for="textarea" class="form-label">Textarea</label>
+                <textarea id="textarea" name="content" rows="7" cols="92"> </textarea>
+                
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"><button type="submit" class="btn btn-primary">Submit</button></div>
+            <div class=""></div>
+        
+        </div>
+    </form>
+    
+</div>
+
+{% endblock %}
+</body>

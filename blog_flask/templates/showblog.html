@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block title %}Add post page {% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <div class="container-fluid my-5">
+        
+       <h3>Blog posts </h3><br>
+       <!-- {% for post in posts %}
+      
+            <div style="width:850px; height:280px;"    class="shadow p-3 mb-5 bg-body rounded " >
+                    <div style="background-color:rgb(103, 183, 183);width:800px; height:135px";>
+
+                        Author: {{post.poster.username}} <br>
+                            {{post.title}} <br>
+                            
+                            {{post.content}} <br>
+                            {{post.date_posted}} <br>
+
+                    <a href="{{url_for('s_post',id_data=post.id)}}"><button type="submit" class="btn btn-dark btn-sm">View post</button></a>
+                    
+                    {% if current_user.id== post.poster.id or current_user.id==1 %}    
+                        <a href="{{url_for('update',id=post.id)}}"><button type="submit" class="btn btn-primary btn-sm">Update post</button></a>    
+                        <a href="{{url_for('delete_post',id=post.id)}}"><button type="submit" class="btn btn-warning btn-sm">Delete post</button></a>
+                    {% endif %} <br>  
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2">
+
+                                {% if post.poster.profile_pic %}
+                                <img src="{{url_for('static',filename='images/'+post.poster.profile_pic)}}" width="50px" alt="">
+                                {% else %}
+                                <img src="static/image.png" alt="" width="50px">
+                                {% endif %}
+                            
+                            </div>
+                            
+                            <div class="col-lg-10">
+                                
+                                <form action="/add_comments/{{post.id}}" method="POST" id="comm">
+                                    <label for="commentery">Comments</label>
+                                    <input type="text" name="comment" id="commentery" value="">
+
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+                                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                                        
+                                    </div>
+                                    
+                                </form>
+                               
+                                    {% for comment in comments %}
+                                        {% if comment.postcommenter.id==post.id %}
+                                            {{comment.text}}
+                                            {% if current_user.id==comment.commenter.id%}
+                                            <form action="" id="comment_form">
+                                                <div id="commentry1">
+                                                    <label for="commentery1">Comments</label>
+                                                    <input type="text" name="comment" id="commentery1" value="">
+                                                </div>
+                                                
+                                               
+                                                <a href="{{url_for('edit_comment')}}"><button type="submit" class="btn btn-primary btn-sm" id="comment_update" name="comment1" value="{{comment.id}}" >Update</button></a>
+                                            </form>
+                                               
+                                            <a href="{{url_for('delete_comments',comment=comment.id)}}">Delete</a>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                
+                               
+                            </div>
+                            <div class="c"></div>
+                            
+
+                        </div>
+                    </div>
+                    
+            </div>
+            
+        
+    {% endfor %} -->
+    <div class="container-fluid my-5">
+        {% for post in posts %}
+        <div class="shadow p-3 mb-5 bg-body rounded">
+          <div class="bg-primary text-white p-3 mb-3">
+            <h5 class="mb-0">Author: {{ post.poster.username }}</h5>
+            <p class="mb-0">{{ post.title }}</p>
+          </div>
+          <div class="row">
+            <div class="col-lg-2">
+              {% if post.poster.profile_pic %}
+              <img src="{{url_for('static',filename='images/'+post.poster.profile_pic)}}" width="50px" alt="">
+              {% else %}
+              <img src="static/image.png" alt="" width="50px">
+              {% endif %}
+            </div>
+            <div class="col-lg-10">
+              <p class="mb-0">{{ post.content }}</p>
+              <small class="text-muted">{{ post.date_posted }}</small>
+              <hr>
+              <a href="{{url_for('s_post',id_data=post.id)}}" class="btn btn-dark btn-sm mr-2">View Post</a>
+              {% if current_user.id== post.poster.id or current_user.id==1 %}
+              <a href="{{url_for('update',id=post.id)}}" class="btn btn-primary btn-sm mr-2">Update Post</a>
+              <a href="{{url_for('delete_post',id=post.id)}}" class="btn btn-warning btn-sm">Delete Post</a>
+              {% endif %}
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-lg-2">
+              <h6 class="mb-0">Comments:</h6>
+            </div>
+            <div class="col-lg-10">
+              <form action="/add_comments/{{post.id}}" method="POST" id="comm">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="comment" id="commentery" placeholder="Add a comment...">
+                </div>
+                <br>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                </div>
+              </form>
+              <br>
+              <div class="mb-3">
+                {% for comment in comments %}
+                {% if comment.postcommenter.id==post.id %}
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <p class="card-text mb-0">{{ comment.text }}</p>
+                    <small class="text-muted">{{ comment.date_posted }}</small>
+                    {% if current_user.id==comment.commenter.id%}
+                    <div class="mt-2">
+                      <form action="" id="comment_form">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="comment" id="commentery1" value="{{comment.text}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                          <button type="submit" class="btn btn-primary btn-sm" id="comment_update" name="comment1" value="{{comment.id}}">Update</button>
+                          <a href="{{url_for('delete_comments',comment=comment.id)}}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                      </form>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+    $('#commentry1').hide();
+
+});
+
+$('#comment_form').change(function(){
+    $('#commentery').hide();
+
+    var commentname=$('#commentery').val()
+    var commentid=$('#comment_update').val()
+    jsoni={'comments':commentname,'comment_id':commentid}
+
+    $.ajax({
+        url:'/edit_comment',
+        data:jsoni,
+        type:'POST',
+        success:function(response){
+            console.log(response)
+        },
+            error:function(error){
+            console.log(error)
+        }
+            
+    });
+
+});
+
+</script>
+
+{% endblock %}

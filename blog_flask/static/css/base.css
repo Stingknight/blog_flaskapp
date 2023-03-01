@@ -1,0 +1,17 @@
+body{
+    background-image: url("/static/images/register1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+h3{
+    color: black;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 20px;
+}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Add post page {% endblock %}
+
+{% block content %}
+
+    <h2>You searched for {{ searched }}</h2>
+ 
+{% for post in post_filter %}
+   
+
+<div class="container-fluid my-5">
+   
+
+
+        <div style="width:750px; height:150px;"    class="shadow p-3 mb-5 bg-body rounded " >
+                <div>
+                
+                    Author: {{post.poster.username}} <br>
+                        {{post.title}} <br>
+                        
+                        {{post.content}} <br>
+                        {{post.date_posted}} <br>
+                        
+                        <a href="{{url_for('s_post',id=post.id)}}"><button type="submit" class="btn btn-dark btn-sm">View post</button></a>
+                        {% if current_user.id== post.poster.id or current_user.id==1 %}    
+                        <a href="{{url_for('update',id=post.id)}}"><button type="submit" class="btn btn-primary btn-sm">Update post</button></a>    
+                        <a href="{{url_for('delete_post',id=post.id)}}"><button type="submit" class="btn btn-warning btn-sm">Delete post</button></a>
+                        {% endif %} 
+                        
+                </div>
+        </div>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Add post page {% endblock %}
+
+{% block content %}
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+
+
+<div class="container-fluid my-5">
+    <form  action="" method="POST">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                <label for="exampleInputtitle1" class="form-label">Title</label>
+                <input  type="text" class="form-control" name="title1" id="exampleInputtitle1" aria-describedby="textHelp" value="{{data.title}}" style="background-color:rgb(91, 94, 97) ;">
+                
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+        </div>
+        <br>
+
+        
+        <br>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                <label for="textarea1" class="form-label">Textarea</label>
+                <textarea id="textarea1" name="content1" rows="7" cols="92" style="background-color:rgb(91, 94, 97) ;"> {{data.content}}</textarea>
+                
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"><button type="submit" class="btn btn-primary">Submit</button></div>
+            <div class=""></div>
+        
+        </div>
+    </form>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div  class="col-lg-8 col-md-8 col-sm-8 col-8" >
+                <a href="{{url_for('show_blog')}}"><button type="submit" class="btn btn-dark btn-sm">View full Blog</button></a>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            
+        </div>
+        
+    </div>
+      
+</div>
+
+{% endblock %}

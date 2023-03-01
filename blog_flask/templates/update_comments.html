@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Welcome {% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+
+<form action="" method="POST">
+    <label for="commentery">Comments</label>
+    <input type="text" name="comment1" id="commentery" value="">
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-2">
+        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+        
+    </div>
+
+{% endblock %}

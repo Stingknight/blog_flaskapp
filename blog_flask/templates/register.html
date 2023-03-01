@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Register page {% endblock %}
+
+{% block link %}<link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">{% endblock %}
+
+{% block content %}
+<body id="body_register">
+    
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="container-fluid my-5" >
+    <form method="POST">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2 "></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-7">
+                <label for="exampleInputusername" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="exampleInputusername" aria-describedby="textHelp">
+                
+                    
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+        </div>
+        
+        <div class="row">
+            
+                <div class="col-lg-2 col-md-2 col-sm-2 col-2 "></div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-7">
+                    <label for="exampleInputpassowrd" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputpassowrd" aria-describedby="passwordHelp">
+                    
+                <div class="col-lg-2 col-md-2 col-sm-2 col-2 "></div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2 "></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-7">
+                <label for="exampleInputpassowrd1" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" name="conf_password" id="exampleInputpassowrd1" aria-describedby="passwordHelp">
+                
+                <div style="color:black;" id="passwordHelp" class="form-text">We'll never share your password with anyone else.
+                   </div>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2 col-2 "></div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-2"><button type="submit" class="btn btn-primary">Submit</button></div>
+            <div class=""></div>
+        </div>
+    </form>
+</div>
+
+
+</body>
+
+{% endblock %}

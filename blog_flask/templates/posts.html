@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Add post page {% endblock %}
+
+
+
+
+
+{% block content %}
+<body style="background-color: black;">
+    
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+  
+    <div class="container-fluid my-5">
+        <h3 style="color: azure;">Blog posts </h3><br>
+    
+    
+            <div style="width:750px; height:150px;"    class="shadow p-3 mb-5 bg-body rounded " >
+                    <div >
+                    
+                        Author: {{post.poster.username}} <br>
+                            {{post.title}} <br>
+                            
+                            {{post.content}} <br>
+                            {{post.date_posted}} <br>
+                            <a href="{{url_for('show_blog')}}"><button type="submit" class="btn btn-dark btn-sm">View full blog</button></a>
+                            
+                        </div>  
+            </div>
+        </body>   
+{% endblock %}
